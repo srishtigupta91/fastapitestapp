@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./login.css";
 
+interface User {
+  username: string;
+  email: string;
+  role: string;
+}
+
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const [user, setUser] = useState<User | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,11 +21,33 @@ const Login: React.FC = () => {
         username: username,
         password: password,
       });
-      setMessage(`Login successful! Token: ${response.data.access_token}`);
+      const userDetails = response.data.user; // Assuming the API returns user details
+      setUser(userDetails);
+      setMessage("");
     } catch (error) {
       setMessage("Login failed. Please check your credentials.");
     }
   };
+
+  const handleLogout = () => {
+    setUser(null);
+    setUsername("");
+    setPassword("");
+    setMessage("You have been logged out.");
+  };
+
+  if (user) {
+    return (
+      <div className="dashboard">
+        <h1>Welcome, {user.username}!</h1>
+        <p>Email: {user.email}</p>
+        <p>Role: {user.role}</p>
+        <button onClick={handleLogout} className="button">
+          Logout
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
