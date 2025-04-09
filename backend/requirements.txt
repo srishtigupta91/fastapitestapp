@@ -1,0 +1,6 @@
+fastapi
+databases
+sqlalchemy
+asyncpg
+passlib
+python-jose
