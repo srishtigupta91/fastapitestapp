@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlmodel import SQLModel, Session
 
 # Replace with your actual database URL
-DATABASE_URL = "postgresql://postgres:admin@localhost:5433/fastapi_db"
+DATABASE_URL = "postgresql://postgres:mypsqlpwd@db:5432/fastapi_db"
 
 # Database connection
 engine = create_engine(DATABASE_URL, echo=True)

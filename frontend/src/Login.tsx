@@ -5,7 +5,6 @@ import "./login.css";
 interface User {
   username: string;
   email: string;
-  role: string;
 }
 
 const Login: React.FC = () => {
@@ -41,7 +40,6 @@ const Login: React.FC = () => {
       <div className="dashboard">
         <h1>Welcome, {user.username}!</h1>
         <p>Email: {user.email}</p>
-        <p>Role: {user.role}</p>
         <button onClick={handleLogout} className="button">
           Logout
         </button>
